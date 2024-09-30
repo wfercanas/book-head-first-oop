@@ -1,32 +1,37 @@
 import { Guitar } from "./Guitar.mjs";
-import { Inventory } from "./Intentory.mjs";
+import { Builder, Type, Wood } from "./Guitar.types.mjs";
+
+import { Inventory } from "./Inventory.mjs";
 
 class FindGuitarTester {
   static main(args) {
     const inventory = new Inventory();
-    this.initializeInventory(inventory);
+    try {
+      this.initializeInventory(inventory);
+      const whatErinLikes = new Guitar(
+        "",
+        0,
+        Builder.FENDER,
+        "Stratocastor",
+        Type.ELECTRIC,
+        Wood.ALDER,
+        Wood.ALDER
+      );
 
-    const whatErinLikes = new Guitar(
-      "",
-      0,
-      "fender",
-      "Stratocastor",
-      "electric",
-      "Alder",
-      "Alder"
-    );
+      const guitar = inventory.search(whatErinLikes);
 
-    const guitar = inventory.search(whatErinLikes);
-
-    if (guitar !== null) {
-      console.log(`
+      if (guitar !== null) {
+        console.log(`
           Erin, you might like this ${guitar.getBuilder} ${guitar.getModel} guitar:
           ${guitar.getBackWood} back and sides,
           ${guitar.getTopWood} top.
           You can have it for only $${guitar.getPrice}!
           `);
-    } else {
-      console.log("Sorry, Erin, we have nothing for you.");
+      } else {
+        console.log("Sorry, Erin, we have nothing for you.");
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -35,11 +40,11 @@ class FindGuitarTester {
       inventory.addGuitar(
         1,
         1200,
-        "Fender",
+        Builder.FENDER,
         "Stratocastor",
-        "electric",
-        "Alder",
-        "Alder"
+        Type.ELECTRIC,
+        Wood.ALDER,
+        Wood.ALDER
       );
     }
   }
