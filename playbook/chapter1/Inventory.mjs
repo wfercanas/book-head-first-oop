@@ -49,6 +49,7 @@ class Inventory {
   }
 
   search(searchGuitar) {
+    const matchingGuitars = [];
     for (let guitar of this._guitars) {
       if (searchGuitar.getBuilder !== guitar.getBuilder) {
         continue;
@@ -70,9 +71,13 @@ class Inventory {
       if (searchGuitar.getTopWood !== guitar.getTopWood) {
         continue;
       }
-      return guitar;
+      matchingGuitars.push(guitar);
     }
-    return null;
+    if (matchingGuitars.length > 0) {
+      return matchingGuitars;
+    } else {
+      return null;
+    }
   }
 }
 
