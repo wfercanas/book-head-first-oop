@@ -22,10 +22,11 @@ class FindGuitarTester {
       if (Array.isArray(guitars) && guitars.length > 0) {
         console.log("Erin, you might like these guitars:");
         for (let guitar of guitars) {
+          const guitarSpec = guitar.getGuitarSpec;
           console.log(`
-            We have a ${guitar.getGuitarSpec.getBuilder} ${guitar.getGuitarSpec.getModel} guitar:
-            ${guitar.getGuitarSpec.getBackWood} back and sides,
-            ${guitar.getGuitarSpec.getTopWood} top.
+            We have a ${guitarSpec.getBuilder} ${guitarSpec.getModel} guitar:
+            ${guitarSpec.getBackWood} back and sides,
+            ${guitarSpec.getTopWood} top.
             You can have it for only $${guitar.getPrice}!
             `);
         }
