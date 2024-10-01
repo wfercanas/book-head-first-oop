@@ -25,24 +25,25 @@ class Inventory {
   search(searchSpec) {
     const matchingGuitars = [];
     for (let guitar of this._guitars) {
-      if (searchSpec.getBuilder !== guitar.getGuitarSpec.getBuilder) {
+      const guitarSpec = guitar.getGuitarSpec;
+      if (searchSpec.getBuilder !== guitarSpec.getBuilder) {
         continue;
       }
       const model = searchSpec.getModel.toLowerCase();
       if (
         model !== null &&
         model !== "" &&
-        model !== guitar.getGuitarSpec.getModel.toLowerCase()
+        model !== guitarSpec.getModel.toLowerCase()
       ) {
         continue;
       }
-      if (searchSpec.getType !== guitar.getGuitarSpec.getType) {
+      if (searchSpec.getType !== guitarSpec.getType) {
         continue;
       }
-      if (searchSpec.getBackWood !== guitar.getGuitarSpec.getBackWood) {
+      if (searchSpec.getBackWood !== guitarSpec.getBackWood) {
         continue;
       }
-      if (searchSpec.getTopWood !== guitar.getGuitarSpec.getTopWood) {
+      if (searchSpec.getTopWood !== guitarSpec.getTopWood) {
         continue;
       }
       matchingGuitars.push(guitar);
