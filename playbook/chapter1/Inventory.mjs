@@ -1,41 +1,15 @@
 import { Guitar } from "./Guitar.mjs";
-import { Builder, Type, Wood } from "./Guitar.types.mjs";
 
 class Inventory {
   constructor() {
     this._guitars = [];
   }
 
-  addGuitar(serialNumber, price, builder, model, type, backWood, topWood) {
-    if (!Object.values(Builder).includes(builder)) {
-      throw new Error(`${builder} is not a valid guitar builder`);
-    }
-
-    if (!Object.values(Type).includes(type)) {
-      throw new Error(`${type} is not a valid guitar type`);
-    }
-
-    if (!Object.values(Wood).includes(backWood)) {
-      throw new Error(`${backWood} is not a valid guitar wood`);
-    }
-
-    if (!Object.values(Wood).includes(topWood)) {
-      throw new Error(`${topWood} is not a valid guitar wood`);
-    }
-
-    try {
-      const guitar = new Guitar(
-        serialNumber,
-        price,
-        builder,
-        model,
-        type,
-        backWood,
-        topWood
-      );
-      this._guitars.push(guitar);
-    } catch (error) {
-      console.error(error);
+  addGuitar(newGuitar) {
+    if (newGuitar instanceof Guitar) {
+      this._guitars.push(newGuitar);
+    } else {
+      throw new Error("This guitar cannot be added to the inventory");
     }
   }
 
@@ -48,27 +22,27 @@ class Inventory {
     return null;
   }
 
-  search(searchGuitar) {
+  search(searchSpec) {
     const matchingGuitars = [];
     for (let guitar of this._guitars) {
-      if (searchGuitar.getBuilder !== guitar.getBuilder) {
+      if (searchSpec.getBuilder !== guitar.getGuitarSpec.getBuilder) {
         continue;
       }
-      const model = searchGuitar.getModel.toLowerCase();
+      const model = searchSpec.getModel.toLowerCase();
       if (
         model !== null &&
         model !== "" &&
-        model !== guitar.getModel.toLowerCase()
+        model !== guitar.getGuitarSpec.getModel.toLowerCase()
       ) {
         continue;
       }
-      if (searchGuitar.getType !== guitar.getType) {
+      if (searchSpec.getType !== guitar.getGuitarSpec.getType) {
         continue;
       }
-      if (searchGuitar.getBackWood !== guitar.getBackWood) {
+      if (searchSpec.getBackWood !== guitar.getGuitarSpec.getBackWood) {
         continue;
       }
-      if (searchGuitar.getTopWood !== guitar.getTopWood) {
+      if (searchSpec.getTopWood !== guitar.getGuitarSpec.getTopWood) {
         continue;
       }
       matchingGuitars.push(guitar);
