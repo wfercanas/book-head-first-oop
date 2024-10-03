@@ -14,7 +14,8 @@ class FindGuitarTester {
         "Stratocastor",
         Type.ELECTRIC,
         Wood.ALDER,
-        Wood.ALDER
+        Wood.ALDER,
+        6
       );
 
       const guitars = inventory.search(whatErinLikes);
@@ -22,13 +23,13 @@ class FindGuitarTester {
       if (Array.isArray(guitars) && guitars.length > 0) {
         console.log("Erin, you might like these guitars:");
         for (let guitar of guitars) {
-          const guitarSpec = guitar.getGuitarSpec;
+          const guitarSpec = guitar.getSpec;
           console.log(`
             We have a ${guitarSpec.getBuilder} ${guitarSpec.getModel} guitar:
             ${guitarSpec.getBackWood} back and sides,
             ${guitarSpec.getTopWood} top.
             You can have it for only $${guitar.getPrice}!
-            `);
+            ---`);
         }
       } else {
         console.log("Sorry, Erin, we have nothing for you.");
@@ -46,7 +47,8 @@ class FindGuitarTester {
           "Stratocastor",
           Type.ELECTRIC,
           Wood.ALDER,
-          Wood.ALDER
+          Wood.ALDER,
+          6
         );
 
         const guitar1 = new Guitar("V95693", 1499.95, specification);

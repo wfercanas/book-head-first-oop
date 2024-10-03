@@ -24,7 +24,7 @@ class Guitar {
     this._price = newPrice;
   }
 
-  get getGuitarSpec() {
+  get getSpec() {
     return this._guitarSpec;
   }
 }

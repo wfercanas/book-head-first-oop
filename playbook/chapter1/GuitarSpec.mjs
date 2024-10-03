@@ -1,7 +1,7 @@
 import { Builder, Type, Wood } from "./Guitar.types.mjs";
 
 class GuitarSpec {
-  constructor(builder, model, type, backWood, topWood) {
+  constructor(builder, model, type, backWood, topWood, numStrings) {
     if (Object.values(Builder).includes(builder)) {
       this._builder = builder;
     } else {
@@ -28,6 +28,16 @@ class GuitarSpec {
     } else {
       throw new Error(`${topWood} is not a valid guitar wood`);
     }
+
+    if (
+      typeof numStrings === "number" &&
+      numStrings > 0 &&
+      !Number.isNaN(numStrings)
+    ) {
+      this._numStrings = numStrings;
+    } else {
+      throw new Error(`${numStrings} is not a valid amount of strings`);
+    }
   }
 
   get getBuilder() {
@@ -48,6 +58,38 @@ class GuitarSpec {
 
   get getTopWood() {
     return this._topWood;
+  }
+
+  get getNumStrings() {
+    return this._numStrings;
+  }
+
+  matches(spec) {
+    if (this._builder !== spec.getBuilder) {
+      return false;
+    }
+    const model = this._model.toLowerCase();
+    if (
+      model !== null &&
+      model !== "" &&
+      model !== spec.getModel.toLowerCase()
+    ) {
+      return false;
+    }
+    if (this._type !== spec.getType) {
+      return false;
+    }
+    if (this._backWood !== spec.getBackWood) {
+      return false;
+    }
+    if (this._topWood !== spec.getTopWood) {
+      return false;
+    }
+    if (this._numStrings !== spec.getNumStrings) {
+      return false;
+    }
+
+    return true;
   }
 }
 
