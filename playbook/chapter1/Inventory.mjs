@@ -1,5 +1,4 @@
 import { Guitar } from "./Guitar.mjs";
-import { GuitarSpec } from "./GuitarSpec.mjs";
 
 class Inventory {
   constructor() {
