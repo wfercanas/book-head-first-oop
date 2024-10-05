@@ -15,6 +15,12 @@ class Remote {
       this._door.close();
     } else {
       this._door.open();
+
+      const timeoutId = setTimeout(() => {
+        this._door.close();
+      }, 5000);
+
+      return timeoutId;
     }
   }
 }
